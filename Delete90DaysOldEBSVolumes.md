@@ -1,3 +1,16 @@
+## Create an IAM role with permissions to access EC2 and S3 services. Grant the following permissions to the IAM role:
+```
+ec2:DescribeVolumes
+ec2:DeleteVolume
+s3:PutObject
+s3:GetObject
+s3:DeleteObject
+```
+- Create a new Lambda function in the AWS Management Console, choose Python as the runtime, and select the IAM role that was created in step 1.
+
+- Copy the following code into the Lambda function code editor:
+
+```
 import boto3
 from datetime import datetime, timedelta
 import csv
@@ -68,3 +81,4 @@ def lambda_handler(event, context):
     
     # Upload the updated CSV file to S3
     s3.upload_file('/tmp/ebs_unused_updated.csv', 'my-bucket', 'ebs_unused_updated.csv')
+    ```
